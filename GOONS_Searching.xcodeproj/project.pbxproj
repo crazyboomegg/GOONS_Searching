@@ -17,6 +17,7 @@
 		7D77F4062AC0857900359846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D77F4042AC0857900359846 /* LaunchScreen.storyboard */; };
 		7DE5FAEF2AC311F800942BA2 /* SearchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAEE2AC311F800942BA2 /* SearchDataModel.swift */; };
 		7DE5FAF22AC3413600942BA2 /* SearchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF12AC3413600942BA2 /* SearchListRepository.swift */; };
+		7DE5FAF52AC34B5900942BA2 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF42AC34B5900942BA2 /* SearchListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 		7D77F4072AC0857900359846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DE5FAEE2AC311F800942BA2 /* SearchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataModel.swift; sourceTree = "<group>"; };
 		7DE5FAF12AC3413600942BA2 /* SearchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListRepository.swift; sourceTree = "<group>"; };
+		7DE5FAF42AC34B5900942BA2 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		8B63DF05B4A962EE9AE84A4A /* Pods-GOONS_Searching.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOONS_Searching.debug.xcconfig"; path = "Target Support Files/Pods-GOONS_Searching/Pods-GOONS_Searching.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		7D77F3F82AC0857700359846 /* GOONS_Searching */ = {
 			isa = PBXGroup;
 			children = (
+				7DE5FAF32AC34B3400942BA2 /* ViewModel */,
 				7DE5FAF02AC340FA00942BA2 /* Repository */,
 				7DE5FAED2AC311CB00942BA2 /* Model */,
 				7D77F3F92AC0857700359846 /* AppDelegate.swift */,
@@ -143,6 +146,14 @@
 				7DE5FAF12AC3413600942BA2 /* SearchListRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		7DE5FAF32AC34B3400942BA2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DE5FAF42AC34B5900942BA2 /* SearchListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +275,7 @@
 				7D77F3FE2AC0857700359846 /* SearchListViewController.swift in Sources */,
 				7D4F93492AC0CD5C001D482D /* SearchTableViewCell.swift in Sources */,
 				7D77F3FA2AC0857700359846 /* AppDelegate.swift in Sources */,
+				7DE5FAF52AC34B5900942BA2 /* SearchListViewModel.swift in Sources */,
 				7DE5FAEF2AC311F800942BA2 /* SearchDataModel.swift in Sources */,
 				7D77F3FC2AC0857700359846 /* SceneDelegate.swift in Sources */,
 				7DE5FAF22AC3413600942BA2 /* SearchListRepository.swift in Sources */,
