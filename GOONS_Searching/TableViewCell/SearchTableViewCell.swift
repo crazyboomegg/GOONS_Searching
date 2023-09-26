@@ -11,6 +11,7 @@ import SnapKit
 import Kingfisher
 
 class SearchTableViewCell: UITableViewCell {
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addUI()
@@ -21,6 +22,12 @@ class SearchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func bind(repositories: Repository) {
+        self.nameLabel.text = repositories.fullName
+        self.contentLabel.text = repositories.content
+        self.iconImage.kf.setImage(with: URL(string: repositories.owner.image!))
+        
+    }
     // MARK: - 生成UI的func
     
     private func addUI() {
@@ -35,6 +42,25 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     private func addConstraints() {
+        baseView.snp.makeConstraints { make in
+            make.left.equalTo(contentView.snp.left).offset(0)
+            make.right.equalTo(contentView.snp.right).offset(0)
+            make.top.equalTo(contentView.snp.top).offset(0)
+            make.bottom.equalTo(contentView.snp.bottom).offset(0)
+        }
+        
+        iconImage.snp.makeConstraints { make in
+            make.left.equalTo(baseView.snp.left).offset(0)
+            make.centerY.equalTo(baseView)
+            make.height.equalTo(60)
+            make.width.equalTo(60)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.left.equalTo(iconImage.snp.right).offset(10)
+            make.centerY.equalTo(iconImage)
+            make.width.equalTo(100)
+        }
         
     }
     

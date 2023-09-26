@@ -9,26 +9,52 @@ import UIKit
 import SnapKit
 
 class SearchListViewController: UIViewController, UISearchBarDelegate {
-    
+    var viewModel = SearchListViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         addUI()
         addConstraints()
+        setView()
         self.navigationItem.titleView = themeTitle
+        searchBar.delegate = self
+       
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            viewModel.getSearchList(searchText: searchText) {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        } else {
+            viewModel.clearSearchList()
+            tableView.reloadData()
+        }
+    }
     
     func setView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 100
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
+        if tableView.contentSize.height != 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.cellForRow(at: indexPath)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     // MARK: - 生成UI的func
     private func addUI() {
 
         baseView.addSubview(searchBar)
+        baseView.addSubview(tableView)
         self.view.addSubview(baseView)
     }
     
@@ -41,6 +67,13 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
             make.left.equalTo(baseView.snp.left).offset(10)
             make.right.equalTo(baseView.snp.right).offset(-10)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(0)
+            make.left.equalTo(baseView.snp.left).offset(0)
+            make.right.equalTo(baseView.snp.right).offset(0)
+            make.bottom.equalTo(baseView.snp.bottom).offset(0)
         }
     }
     
@@ -66,18 +99,20 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             let searchBar = UISearchBar()
             searchBar.placeholder = "請輸入關鍵字搜查"
             return searchBar
-        }()
+    }()
     
 }
 
 
 extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return viewModel.searchList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+        cell.bind(repositories: viewModel.searchList[indexPath.row])
+        return cell
     }
 
 

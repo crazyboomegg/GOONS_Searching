@@ -9,18 +9,23 @@ import Foundation
 
 
 final class SearchListViewModel {
-    var repositories: [Repository] = []
-    
-    func getSearchList(searchText: String) {
+    var searchList: [Repository] = []
+
+    func getSearchList(searchText: String, completion: @escaping () -> Void) {
         let repository = SearchListRepository()
         repository.getSearchList(searchText: searchText) { result in
+            print("aaaaaa" + "\(searchText)")
             switch result {
             case .success(let value):
-                self.repositories = value
+                self.searchList = value
             case .failure(let error):
                 print(error)
             }
-            
+            completion()
         }
+    }
+    
+    func clearSearchList() {
+        searchList.removeAll()
     }
 }

@@ -20,9 +20,9 @@ struct SearchResult: Decodable {
 }
 
 struct Repository: Decodable {
-    let fullName: String
+    let fullName: String?
     let owner: Owner
-    let content: String
+    let content: String?
     
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
@@ -32,9 +32,9 @@ struct Repository: Decodable {
 }
 
 struct Owner: Decodable {
-    let avatarUrl: String
+    let image: String?
 
     enum CodingKeys: String, CodingKey {
-        case avatarUrl = "avatar_url"
+        case image = "avatar_url"
     }
 }

@@ -13,6 +13,7 @@ class SearchListRepository {
     func getSearchList(searchText: String, completion: @escaping (Result<[Repository], Error>) -> Void) {
         let urlString = baseURL + searchText
         guard let url = URL(string: urlString) else { return }
+        print("aaaurl" + "\(url)")
         URLSession.shared.dataTask(with: url) { (data, response, error ) in
             if let error = error {
                 print(error)
@@ -28,6 +29,7 @@ class SearchListRepository {
             do {
                 let decoder = JSONDecoder()
                 let jsondata = try decoder.decode(SearchResult.self, from: data)
+                completion(.success(jsondata.items))
             } catch let error {
                 completion(.failure(error))
             }
