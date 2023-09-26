@@ -18,7 +18,6 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
         setView()
         self.navigationItem.titleView = themeTitle
         searchBar.delegate = self
-       
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -38,8 +37,8 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
-        tableView.separatorStyle = .none
-        tableView.estimatedRowHeight = 100
+        tableView.separatorStyle = .singleLine
+        tableView.estimatedRowHeight = 120
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
@@ -115,7 +114,9 @@ extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
 
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tableView.estimatedRowHeight
+    }
 }
 
 

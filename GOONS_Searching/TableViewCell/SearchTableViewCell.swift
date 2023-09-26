@@ -50,16 +50,20 @@ class SearchTableViewCell: UITableViewCell {
         }
         
         iconImage.snp.makeConstraints { make in
-            make.left.equalTo(baseView.snp.left).offset(0)
+            make.left.equalTo(baseView.snp.left).offset(10)
             make.centerY.equalTo(baseView)
-            make.height.equalTo(60)
-            make.width.equalTo(60)
+            make.height.equalTo(100)
+            make.width.equalTo(100)
         }
         
         stackView.snp.makeConstraints { make in
             make.left.equalTo(iconImage.snp.right).offset(10)
+            make.right.equalTo(baseView.snp.right).offset(-10)
             make.centerY.equalTo(iconImage)
-            make.width.equalTo(100)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.height.equalTo(30)
         }
         
     }
@@ -80,6 +84,7 @@ class SearchTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.numberOfLines = 0
         label.textColor = UIColor.black
         label.text = "Repository name"
         return label
@@ -89,6 +94,7 @@ class SearchTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16)
+        label.numberOfLines = 0
         label.textColor = UIColor.black
         label.text = "Repository nameRepository nameRepository name"
         return label
@@ -98,7 +104,8 @@ class SearchTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 5
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 0
         return stackView
     }()
     
