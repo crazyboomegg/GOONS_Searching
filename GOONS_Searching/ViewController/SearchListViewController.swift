@@ -19,15 +19,15 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
     }
     
     
-//    func setView() {
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
-//    }
+    func setView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+    }
     
     // MARK: - 生成UI的func
     private func addUI() {
-       // baseView.addSubview(themeTitle)
+
         baseView.addSubview(searchBar)
         self.view.addSubview(baseView)
     }
@@ -37,27 +37,13 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             make.left.right.top.bottom.equalToSuperview()
         }
         
-//        themeTitle.snp.makeConstraints { make in
-//            make.top.equalTo(baseView.snp.top).offset(80)
-//            make.left.equalTo(baseView.snp.left).offset(10)
-//
-//        }
-        
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
             make.left.equalTo(baseView.snp.left).offset(10)
             make.right.equalTo(baseView.snp.right).offset(-10)
-
         }
-        
-//        searchBar.snp.makeConstraints { make in
-//            make.top.equalTo(themeTitle.snp.bottom).offset(20)
-//            make.left.equalTo(baseView.snp.left).offset(10)
-//            make.right.equalTo(baseView.snp.right).offset(-10)
-//
-//        }
     }
-    
+
     private var baseView: UIView = {
         let view = UIView()
         return view
@@ -85,16 +71,16 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
 }
 
 
-//extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//
-//
-//}
-//
+extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+
+
+}
+
 
