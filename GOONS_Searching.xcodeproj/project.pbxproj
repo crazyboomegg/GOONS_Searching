@@ -19,6 +19,7 @@
 		7DE5FAF22AC3413600942BA2 /* SearchListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF12AC3413600942BA2 /* SearchListRepository.swift */; };
 		7DE5FAF52AC34B5900942BA2 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF42AC34B5900942BA2 /* SearchListViewModel.swift */; };
 		7DE5FAF72AC3558C00942BA2 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF62AC3558C00942BA2 /* SearchData.swift */; };
+		7DE5FAF92AC3986C00942BA2 /* SearchInfoPageViewContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5FAF82AC3986C00942BA2 /* SearchInfoPageViewContriller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,7 @@
 		7DE5FAF12AC3413600942BA2 /* SearchListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListRepository.swift; sourceTree = "<group>"; };
 		7DE5FAF42AC34B5900942BA2 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		7DE5FAF62AC3558C00942BA2 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
+		7DE5FAF82AC3986C00942BA2 /* SearchInfoPageViewContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfoPageViewContriller.swift; sourceTree = "<group>"; };
 		8B63DF05B4A962EE9AE84A4A /* Pods-GOONS_Searching.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOONS_Searching.debug.xcconfig"; path = "Target Support Files/Pods-GOONS_Searching/Pods-GOONS_Searching.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				7D77F3FD2AC0857700359846 /* SearchListViewController.swift */,
+				7DE5FAF82AC3986C00942BA2 /* SearchInfoPageViewContriller.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				7D77F3FE2AC0857700359846 /* SearchListViewController.swift in Sources */,
 				7D4F93492AC0CD5C001D482D /* SearchTableViewCell.swift in Sources */,
+				7DE5FAF92AC3986C00942BA2 /* SearchInfoPageViewContriller.swift in Sources */,
 				7DE5FAF72AC3558C00942BA2 /* SearchData.swift in Sources */,
 				7D77F3FA2AC0857700359846 /* AppDelegate.swift in Sources */,
 				7DE5FAF52AC34B5900942BA2 /* SearchListViewModel.swift in Sources */,

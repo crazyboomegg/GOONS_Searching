@@ -37,8 +37,32 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc func handleRefresh() {
-        self.refreshControl.endRefreshing()
+        guard let searchText = searchBar.text, !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            showAlert()
+            endRefreshingWithDelay()
+            return
+        }
+        fetchDataOrPerformTask(with: searchText)
     }
+    func endRefreshingWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.refreshControl.endRefreshing()
+        }
+    }
+
+    func fetchDataOrPerformTask(with searchText: String) {
+        viewModel.getSearchList(searchText: searchText){
+           DispatchQueue.main.async {
+             self.refreshControl.endRefreshing()
+          }
+        }
+    }
+    
+    func showAlert() {
+            let alert = UIAlertController(title: "Oops!", message: "The data couldn't be read because it is missing", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     
     func setView() {
         tableView.delegate = self

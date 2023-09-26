@@ -6,15 +6,14 @@
 //
 
 import Foundation
-
+import UIKit
 
 final class SearchListViewModel {
     var searchList: [Repository] = []
-
+    let refreshControl = UIRefreshControl()
     func getSearchList(searchText: String, completion: @escaping () -> Void) {
         let repository = SearchListRepository()
         repository.getSearchList(searchText: searchText) { result in
-            print("aaaaaa" + "\(searchText)")
             switch result {
             case .success(let value):
                 self.searchList = value
