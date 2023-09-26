@@ -10,6 +10,7 @@ import SnapKit
 
 class SearchListViewController: UIViewController, UISearchBarDelegate {
     var viewModel = SearchListViewModel()
+    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -18,6 +19,8 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
         setView()
         self.navigationItem.titleView = themeTitle
         searchBar.delegate = self
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -33,11 +36,16 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    @objc func handleRefresh() {
+        self.refreshControl.endRefreshing()
+    }
+    
     func setView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
         tableView.separatorStyle = .singleLine
+        tableView.refreshControl = refreshControl
         tableView.estimatedRowHeight = 120
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
