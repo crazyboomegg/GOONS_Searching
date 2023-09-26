@@ -43,7 +43,7 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             make.right.equalTo(baseView.snp.right).offset(-10)
         }
     }
-
+    
     private var baseView: UIView = {
         let view = UIView()
         return view
