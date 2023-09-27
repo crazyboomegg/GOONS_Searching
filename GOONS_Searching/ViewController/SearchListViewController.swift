@@ -17,7 +17,7 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
         addUI()
         addConstraints()
         setView()
-        self.navigationItem.titleView = themeTitle
+       // self.navigationItem.titleView = themeTitle
         searchBar.delegate = self
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         
@@ -64,6 +64,10 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             present(alert, animated: true, completion: nil)
         }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func setView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,7 +88,7 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
     // MARK: - 生成UI的func
     private func addUI() {
 
-        baseView.addSubview(searchBar)
+       // tableView.addSubview(searchBar)
         baseView.addSubview(tableView)
         self.view.addSubview(baseView)
     }
@@ -94,16 +98,17 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
             make.left.right.top.bottom.equalToSuperview()
         }
         
-        searchBar.snp.makeConstraints { make in
+//        searchBar.snp.makeConstraints { make in
+//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
+//            make.left.equalTo(baseView.snp.left).offset(10)
+//            make.right.equalTo(baseView.snp.right).offset(-10)
+//        }
+        
+        
+        tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
             make.left.equalTo(baseView.snp.left).offset(10)
             make.right.equalTo(baseView.snp.right).offset(-10)
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(0)
-            make.left.equalTo(baseView.snp.left).offset(0)
-            make.right.equalTo(baseView.snp.right).offset(0)
             make.bottom.equalTo(baseView.snp.bottom).offset(0)
         }
     }
@@ -137,19 +142,65 @@ class SearchListViewController: UIViewController, UISearchBarDelegate {
 
 extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.searchList.count
+        switch section {
+            case 0, 1:
+                return 0
+            case 2:
+                return viewModel.searchList.count
+            default:
+                return 0
+            }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
-        cell.bind(repositories: viewModel.searchList[indexPath.row])
-        return cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+//        cell.bind(repositories: viewModel.searchList[indexPath.row])
+//        return cell
+        if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+            
+            cell.bind(repositories: viewModel.searchList[indexPath.row])
+            
+            return cell
+         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedViewModel = viewModel.searchList[indexPath.row]
         let viewController = SearchInfoPageViewContriller(repository: selectedViewModel)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+           case 0:
+               return 40.0
+           case 1:
+               return 60.0
+           default:
+               return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+           case 0:
+               return themeTitle
+           case 1:
+            searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 44.0)
+               return searchBar
+           default:
+               return nil
+           }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
