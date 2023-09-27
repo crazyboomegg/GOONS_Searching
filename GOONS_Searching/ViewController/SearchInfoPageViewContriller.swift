@@ -8,10 +8,40 @@
 import Foundation
 import UIKit
 import Kingfisher
+import SnapKit
 
 final class SearchInfoPageViewContriller: UIViewController {
+    var repository: Repository
+    
+    init(repository: Repository) {
+           self.repository = repository
+           super.init(nibName: nil, bundle: nil)
+       }
+       
+       required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+        addUI()
+        addConstrains()
+        updateView()
+    }
+    
+    private func updateView() {
+        DispatchQueue.main.async { [self] in
+            guard let searchName = self.repository.fullName else { return }
+            self.mainTitle.text = repository.owner.mainName
+            self.iconImage.kf.setImage(with: URL(string: repository.owner.image!))
+            self.themeTitle.text = repository.fullName
+            self.languageLabel.text = repository.language
+            self.starsLabel.text = String(repository.stars!) + "stars"
+            self.watcherLabel.text = String(repository.watcher!) + "watchers"
+            self.forkLabel.text = String(repository.fork!) + "forks"
+            self.issueLabel.text = String(repository.issue!) + "issues"
+        }
     }
     
     private func addUI() {
@@ -26,6 +56,34 @@ final class SearchInfoPageViewContriller: UIViewController {
     }
     
     private func addConstrains() {
+        baseView.snp.makeConstraints { make in
+            make.left.right.top.bottom.equalToSuperview()
+        }
+        
+        mainTitle.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
+            make.left.equalTo(baseView.snp.left).offset(10)
+        }
+        
+        iconImage.snp.makeConstraints { make in
+            make.top.equalTo(mainTitle.snp.bottom).offset(10)
+            make.left.equalTo(mainTitle.snp.left).offset(0)
+        }
+        
+        themeTitle.snp.makeConstraints { make in
+            make.top.equalTo(iconImage.snp.bottom).offset(30)
+            make.centerX.equalTo(baseView)
+        }
+        
+        languageLabel.snp.makeConstraints { make in
+            make.top.equalTo(themeTitle.snp.bottom).offset(30)
+            make.left.equalTo(iconImage.snp.left).offset(0)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(languageLabel.snp.top).offset(0)
+            make.right.equalTo(iconImage.snp.right).offset(0)
+        }
         
     }
    

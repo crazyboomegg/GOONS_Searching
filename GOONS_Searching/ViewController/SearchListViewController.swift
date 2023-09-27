@@ -145,6 +145,12 @@ extension SearchListViewController: UITableViewDataSource, UITableViewDelegate{
         cell.bind(repositories: viewModel.searchList[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedViewModel = viewModel.searchList[indexPath.row]
+        let viewController = SearchInfoPageViewContriller(repository: selectedViewModel)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.tableView.estimatedRowHeight

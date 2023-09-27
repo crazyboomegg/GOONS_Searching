@@ -19,6 +19,24 @@ final class SearchData {
     var image: String {
         return repository.owner.image ?? ""
     }
+    var mainName: String {
+        return repository.owner.mainName ?? ""
+    }
+    var language: String {
+        return repository.language ?? ""
+    }
+    var stars: Int {
+        return repository.stars ?? 0
+    }
+    var watcher: Int {
+        return repository.watcher ?? 0
+    }
+    var fork: Int {
+        return repository.fork ?? 0
+    }
+    var issue: Int {
+        return repository.issue ?? 0
+    }
     
     init(repository: Repository) {
         self.repository = repository
