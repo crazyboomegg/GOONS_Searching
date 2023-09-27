@@ -12,6 +12,7 @@ import SnapKit
 
 final class SearchInfoPageViewContriller: UIViewController {
     var repository: Repository
+    let screenHeight = UIScreen.main.bounds.height
     
     init(repository: Repository) {
            self.repository = repository
@@ -36,11 +37,11 @@ final class SearchInfoPageViewContriller: UIViewController {
             self.mainTitle.text = repository.owner.mainName
             self.iconImage.kf.setImage(with: URL(string: repository.owner.image!))
             self.themeTitle.text = repository.fullName
-            self.languageLabel.text = repository.language
-            self.starsLabel.text = String(repository.stars!) + "stars"
-            self.watcherLabel.text = String(repository.watcher!) + "watchers"
-            self.forkLabel.text = String(repository.fork!) + "forks"
-            self.issueLabel.text = String(repository.issue!) + "issues"
+            self.languageLabel.text = "Written in" + " \(repository.language ?? "")"
+            self.starsLabel.text = String(repository.stars!) + " stars"
+            self.watcherLabel.text = String(repository.watcher!) + " watchers"
+            self.forkLabel.text = String(repository.fork!) + " forks"
+            self.issueLabel.text = String(repository.issue!) + " issues"
         }
     }
     
@@ -62,27 +63,46 @@ final class SearchInfoPageViewContriller: UIViewController {
         
         mainTitle.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
-            make.left.equalTo(baseView.snp.left).offset(10)
+            make.left.equalTo(baseView.snp.left).offset(20)
         }
         
         iconImage.snp.makeConstraints { make in
-            make.top.equalTo(mainTitle.snp.bottom).offset(10)
+            make.top.equalTo(mainTitle.snp.bottom).offset(20)
+            make.centerX.equalTo(baseView)
             make.left.equalTo(mainTitle.snp.left).offset(0)
+            make.right.equalTo(baseView.snp.right).offset(-10)
+            make.height.equalTo(screenHeight * 0.4)
         }
         
         themeTitle.snp.makeConstraints { make in
-            make.top.equalTo(iconImage.snp.bottom).offset(30)
+            make.top.equalTo(iconImage.snp.bottom).offset(50)
             make.centerX.equalTo(baseView)
         }
         
         languageLabel.snp.makeConstraints { make in
-            make.top.equalTo(themeTitle.snp.bottom).offset(30)
+            make.top.equalTo(themeTitle.snp.bottom).offset(50)
             make.left.equalTo(iconImage.snp.left).offset(0)
         }
         
         stackView.snp.makeConstraints { make in
             make.top.equalTo(languageLabel.snp.top).offset(0)
             make.right.equalTo(iconImage.snp.right).offset(0)
+        }
+        
+        starsLabel.snp.makeConstraints { make in
+            make.right.equalTo(stackView.snp.right).offset(0)
+        }
+        
+        watcherLabel.snp.makeConstraints { make in
+            make.right.equalTo(stackView.snp.right).offset(0)
+        }
+        
+        forkLabel.snp.makeConstraints { make in
+            make.right.equalTo(stackView.snp.right).offset(0)
+        }
+        
+        issueLabel.snp.makeConstraints { make in
+            make.right.equalTo(stackView.snp.right).offset(0)
         }
         
     }
@@ -103,13 +123,15 @@ final class SearchInfoPageViewContriller: UIViewController {
     private var iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "")
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
     
     private var themeTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.numberOfLines = 0
         label.textColor = UIColor.black
         label.text = "Repository Search"
         return label
@@ -117,7 +139,7 @@ final class SearchInfoPageViewContriller: UIViewController {
     
     private var languageLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.black
         label.text = "Program language"
         return label
@@ -126,6 +148,7 @@ final class SearchInfoPageViewContriller: UIViewController {
     private var starsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.black
         label.text = "starsLabel"
         return label
@@ -134,6 +157,7 @@ final class SearchInfoPageViewContriller: UIViewController {
     private var watcherLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.black
         label.text = "watcherLabel"
         return label
@@ -142,6 +166,7 @@ final class SearchInfoPageViewContriller: UIViewController {
     private var forkLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.black
         label.text = "forkLabel"
         return label
@@ -150,6 +175,7 @@ final class SearchInfoPageViewContriller: UIViewController {
     private var issueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
         label.textColor = UIColor.black
         label.text = "issueLabel"
         return label
@@ -160,7 +186,7 @@ final class SearchInfoPageViewContriller: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        stackView.spacing = 0
+        stackView.spacing = 10
         return stackView
     }()
     
